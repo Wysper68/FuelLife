@@ -1,0 +1,21 @@
+{{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.content) }}
+    {{ form_row(form.info) }}
+    {{ form_row(form.categories) }}
+    {{ form_row(form.imageFile) }}
+    <div class="row">
+        <div class="col col-sm-6">
+            {{ form_row(form.lipides) }}
+        </div>
+        
+        <div class="col col-sm-6">
+            {{ form_row(form.proteines) }}
+        </div>
+        <div class="col col-sm-6">
+            {{ form_row(form.glucides) }}
+        </div>
+    </div>
+    <input class="btn-primary btn" type="submit" value="{{ button_label|default('Save') }}">
+{{ form_end(form) }}

@@ -1,0 +1,34 @@
+{% extends 'admin/layouts/base.html.twig' %}
+
+{% block title %}Hello AlimentController!{% endblock %}
+
+{% block body %}
+
+<a href="{{ path('app_category_create') }}" class="btn btn-primary">Créer categorie</a>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Nom</th>
+        <th>Outils</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for category in categories %}
+    <tr>
+    <td>{{category.name}}</td>
+    <td><a class="btn btn-primary" href="{{ path('app_category_edit', {id:category.id}) }}">Editer</a> 
+    <a class="del-btn btn btn-danger" href="#" data-form="{{ category.id }}">Supprimer</a>
+    <form id="del-form-{{ category.id }}" action="{{ path('app_category_delete', { id: category.id }) }}" method="post">
+        <input type="hidden" name="_method" value="delete">
+
+        {# the argument of csrf_token() is an arbitrary string used to generate the token #}
+        <input type="hidden" name="token" value="{{ csrf_token('delete-item') }}"/>
+    </form>
+    </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</div>
+
+{% endblock %}

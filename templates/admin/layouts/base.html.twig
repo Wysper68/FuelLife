@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="robots" content="noindex, nofollow">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('admin') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('admin') }}
+        {% endblock %}
+
+    </head>
+    <body>
+    <main class="main">
+    
+        {% include 'admin/partials/sidebar.html.twig' %}
+        
+        <div class="admin-content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid justify-content-end">
+                 {% if app.user %}
+                <ul class="nav navbar-text">
+                    <li class="nav-item">
+                    Retour au  <a href="{{ path("app_home") }}">site web</a> | Bonjour {{ app.user.email }} <a href="{{ logout_path() }}">Deconnexion</a> 
+                    <li>
+                </ul>
+                 {% endif %}
+            </div>
+            </nav>
+
+            {% for type, messages in app.flashes(['success', 'error', 'info']) %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ type }}" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            
+            <div class="container">
+
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+    </main>
+    </body>
+</html>

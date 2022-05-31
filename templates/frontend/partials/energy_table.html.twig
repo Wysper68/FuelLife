@@ -1,0 +1,32 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+        <th>Infos</th>
+        <th>Quantité / 100g</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if aliment.energie %}
+        <tr>
+            <td>Energie (kJ)</td>
+            <td>{{ aliment.energie * 4.184  }} kj</td>
+        </tr> 
+        <tr>
+            <td>Energie</td>
+            <td>{{ aliment.energie  }} kcal</td>
+        </tr> 
+        {% endif %}
+        <tr>
+            <td>Lipides</td>
+            <td>{{ aliment.lipides  }} g</td>
+        </tr> 
+        <tr>
+            <td>Protéines</td>
+            <td>{{ aliment.proteines  }} g</td>
+        </tr> 
+        <tr>
+            <td>Glucides</td>
+            <td>{{ aliment.glucides  }} g</td>
+        </tr> 
+    </tbody>
+</table>

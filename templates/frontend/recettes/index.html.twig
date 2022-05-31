@@ -1,0 +1,26 @@
+{% extends 'frontend/layouts/base.html.twig' %}
+
+{% block title %}Hello AlimentController!{% endblock %}
+
+{% block body %}
+
+<div class="row">
+        <div class="row">
+        {% for recette in recettes %}
+            <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card">
+                <a href="{{ path('recettes_show', {id:recette.id}) }}">
+                <img src="{{ vich_uploader_asset(recette)|imagine_filter('squared_thumbnail_medium') }}" alt="">
+                </a>
+                <h2> {{ recette.name }} </h2>
+                <p>{{ recette.description }}</p>
+
+                <a href="{{ path('recettes_show', {id:recette.id}) }}">Voir plus</a>
+            </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

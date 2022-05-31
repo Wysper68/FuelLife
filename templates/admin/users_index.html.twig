@@ -1,0 +1,22 @@
+{% extends 'admin/layouts/base.html.twig' %}
+
+{% block title %}Hello AlimentController!{% endblock %}
+
+{% block body %}
+
+<table class="table table-striped">
+    <tr>
+        <th>Email</th>
+        <th>Nom</th>
+        <th>Roles</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+    <td>{{ user.email }}</td>
+    <td>{{ user.fullName }}</td>
+    <td>{% for role in user.roles %}{{ role }}; {% endfor %}</td>
+    </tr>
+    {% endfor %}
+</div>
+
+{% endblock %}
