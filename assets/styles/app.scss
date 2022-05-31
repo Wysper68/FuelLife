@@ -1,0 +1,48 @@
+@import "~bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+html, body{
+    font-family: "Nunito", "Montserrat", "Helvetica", sans-serif;
+}
+
+img{
+    max-width: 100%;
+}
+
+.grid{
+    display: flex;
+    flex-wrap: wrap;
+    .card{
+        flex: 0 0 calc((100%/3) - 20px);
+        margin: 0 10px 20px  ;
+        
+    }
+}
+
+.navbar{
+    ul li a{
+        text-transform: uppercase;
+    }
+}
+
+.card{
+    padding: 20px;
+    a,img{
+        display: block;
+        width: 100%;
+    }
+}
+
+.content{
+    padding-bottom: 50px;
+}
+
+.logo{
+    width: 200px;
+
+    img{
+        display: block;
+        max-width: 100%;
+    }
+}

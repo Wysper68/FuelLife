@@ -1,0 +1,29 @@
+<header class="header">
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
+<div class="container">
+    <a class="nav-link" href="{{ path("app_home") }}">
+        <div class="logo"><img src="{{ app.request.getBaseURL() }}/images/vegood.png" alt="" srcset=""></div>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-0">
+        <li class="nav-item"><a class="nav-link" href="{{ path("app_home") }}">Accueil</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ path("aliments_index") }}">Aliments</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ path("recettes_index") }}">Recettes</a></li>
+        {% if app.user %}
+        <li class="nav-item"><a class="nav-link" href="{{ path("app_account") }}">Mon compte</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ logout_path() }}">Déconnexion</a></li>
+        {% else %}
+        <li class="nav-item"><a class="nav-link" href="{{ path("app_login") }}">Connexion</a></li>
+        {% endif %}
+
+        {% if app.user  and 'ROLE_ADMIN' in app.user.roles %}
+        <li class="nav-item"><a class="nav-link" href="{{ path("app_admin") }}">Admin</a></li>
+        {% endif %}
+        </ul>
+    </div>
+</div>
+</nav>
+</header>

@@ -1,0 +1,12 @@
+{% extends 'frontend/layouts/base.html.twig' %}
+
+{% block title %}Hello AlimentController!{% endblock %}
+
+{% block body %}
+ 	
+<img src="{{ vich_uploader_asset(recette)|imagine_filter('squared_thumbnail_medium') }}" alt="">
+<h1>{{ recette.name }}</h1>
+<p>{{ recette.description }}</p>
+<p>{{ recette.content }}</p>
+
+{% endblock %}

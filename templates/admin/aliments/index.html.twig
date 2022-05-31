@@ -1,0 +1,42 @@
+{% extends 'admin/layouts/base.html.twig' %}
+
+{% block title %}Hello AlimentController!{% endblock %}
+
+{% block body %}
+
+<a href="{{ path('app_aliment_create') }}" class="btn btn-primary">Créer aliment</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Image</th>
+            <th>Date création</th>
+            <th>Auteur</th>
+            <th>Catégories</th>
+            <th>Outils</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for aliment in aliments %}
+        <tr>
+        <td>{{ aliment.name }}</td>
+        <td> {% if (aliment.imageName) %}<img src="{{ vich_uploader_asset(aliment)|imagine_filter('squared_thumbnail_small') }}" alt="">{% endif %}</td>
+        <td>{{ aliment.createdAt|date('d/m/Y') }}</td>
+        <td>{% if (aliment.user) %} {{ aliment.user.fullName }} {% endif %}</td>
+        <td>Catégories : {% for cat in aliment.categories %}{{ cat.name }} {% endfor %}</td>
+        <td>
+        <a class="btn btn-primary" href="{{ path('app_aliment_edit', {id:aliment.id}) }}">Editer</a> 
+        <a class="btn btn-danger del-btn" href="#" data-form="{{ aliment.id }}">Supprimer</a>
+        <form id="del-form-{{ aliment.id }}" action="{{ path('app_aliment_delete', { id: aliment.id }) }}" method="post">
+            <input type="hidden" name="_method" value="delete">
+            {# the argument of csrf_token() is an arbitrary string used to generate the token #}
+            <input type="hidden" name="token" value="{{ csrf_token('delete-item') }}"/>
+        </form>
+        </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</div>
+
+{% endblock %}

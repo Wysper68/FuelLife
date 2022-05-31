@@ -1,0 +1,23 @@
+<nav class="navbar navbar-dark bg-dark flex-column justify-content-start sidebar" style="width: 280px;">
+    <div class="logo-container">
+    <a class="nav-link" href="{{ path("app_home") }}">
+    <div class="logo"><img src="{{ app.request.getBaseURL() }}/images/vegood.png" alt="" srcset=""></div>
+    </a>
+    </div>
+    <div class="nav-container">
+    <h4>Navigation</h4>
+    <ul class="navbar-nav">
+    <li class="nav-item"><a class="nav-link" href="{{ path("app_admin") }}"><i class="fas fa-home"></i> Accueil</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ path("admin_aliments_index") }}"><i class="fas fa-apple-alt"></i> Aliments</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ path("admin_recettes_index") }}"><i class="fas fa-utensils"></i> Recettes</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ path("app_admin_categories") }}"><i class="fas fa-tag"></i> Catégories</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ path("app_admin_users") }}"><i class="fas fa-users"></i> Utilisateurs</a></li>
+    {% if (app.user == false) %}
+    <li class="nav-item"><a class="nav-link" href="{{ path("app_login") }}"><i class="fas fa-sign-in-alt"></i> Connexion</a></li>
+    {% else %}
+    <li class="nav-item"><a class="nav-link" href="{{ path("app_account") }}"><i class="fas fa-user"></i> Mon compte</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ logout_path() }}"><i class="fas fa-sign-out-alt"></i> Deconnexion</a></li>
+    {% endif %}
+    </ul>
+    </div>
+</nav>

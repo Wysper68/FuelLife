@@ -1,0 +1,49 @@
+{% extends 'frontend/layouts/base.html.twig' %}
+
+{% block title %}Hello AlimentController!{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+<div class="row">
+    <div class="col-md-3">
+        {{ form_start(form) }}
+            {{ form_errors(form) }}
+
+            {{ form_row(form.q) }}
+            <h4>Catégories</h4>
+            {{ form_row(form.categories) }}
+
+            {{ form_row(form.submit) }}
+
+        {{ form_end(form) }}
+    </div>
+    <div class="col-md-9">
+        {{ knp_pagination_sortable(aliments, 'Tri nom', 'a.name') }}
+        <div class="row">
+        {% for aliment in aliments %}
+            <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card">
+                <a href="{{ path('aliments_show', {id:aliment.id}) }}">
+                {% if (aliment.imageName) %}
+                <img src="{{ vich_uploader_asset(aliment)|imagine_filter('squared_thumbnail_medium') }}" alt="">
+                {% endif %}
+                </a>
+                <h2> {{ aliment.name }} </h2>
+                <p>{{ aliment.description|raw }}</p>
+                <p>{% for cat in aliment.categories %}<span class="badge bg-secondary">{{ cat.name }}</span>{% endfor %}</p>
+
+                 {% include 'frontend/partials/energy_table.html.twig' %}
+
+                <a href="{{ path('aliments_show', {id:aliment.id}) }}">Voir plus</a>
+            </div>
+            </div>
+        {% endfor %}
+        {{ knp_pagination_render(aliments) }}
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}

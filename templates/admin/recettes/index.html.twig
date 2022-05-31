@@ -1,0 +1,43 @@
+{% extends 'admin/layouts/base.html.twig' %}
+
+{% block body %}
+    <h1>Recette index</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Créé le</th>
+                <th>Image</th>
+                <th>Auteur</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for recette in recettes %}
+            <tr>
+                <td>{{ recette.id }}</td>
+                <td>{{ recette.name }}</td>
+                <td>{{ recette.createdAt ? recette.createdAt|date('d/m/Y') : '' }}</td>
+                <td>{{ recette.user.fullName }}</td>
+                <td><img src="{{ vich_uploader_asset(recette)|imagine_filter('squared_thumbnail_small') }}" alt=""></td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('admin_recettes_edit', {'id': recette.id}) }}">edit</a>
+                    <a class="btn btn-danger del-btn" href="#" data-form="{{ recette.id }}">Supprimer</a>
+                    <form id="del-form-{{ recette.id }}" action="{{ path('admin_recettes_delete', { id: recette.id }) }}" method="post">
+                        {# the argument of csrf_token() is an arbitrary string used to generate the token #}
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ recette.id) }}">
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('admin_recettes_new') }}">Create new</a>
+{% endblock %}

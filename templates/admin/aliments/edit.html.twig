@@ -1,0 +1,16 @@
+{% extends 'admin/layouts/base.html.twig' %}
+
+{% block title %}Hello AlimentController!{% endblock %}
+
+{% block body %}
+
+{{ include('admin/aliments/_form.html.twig') }}
+
+<a class="del-btn" href="#" data-form="{{ aliment.id }}">Supprimer</a>
+<form id="del-form-{{ aliment.id }}" action="{{ path('app_aliment_delete', { id: aliment.id }) }}" method="post">
+    <input type="hidden" name="_method" value="delete">
+
+    {# the argument of csrf_token() is an arbitrary string used to generate the token #}
+    <input type="hidden" name="token" value="{{ csrf_token('delete-item') }}"/>
+</form>
+{% endblock %}

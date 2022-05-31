@@ -1,0 +1,22 @@
+{% extends 'frontend/layouts/base.html.twig' %}
+
+{% block title %}Hello AlimentController!{% endblock %}
+
+{% block body %}
+
+<div class="card p-4 px-lg-4 col-lg-6 mx-auto">
+<img class="rounded mb-3" src="{{ vich_uploader_asset(aliment)|imagine_filter('squared_thumbnail_medium') }}" alt="">
+<h1>{{ aliment.name }}</h1>
+<p>{{ aliment.content|raw }}</p>
+
+<h3>Table nutritionnelle</h3>
+{% include 'frontend/partials/energy_table.html.twig' %}
+
+<h3>Détails</h3>
+<canvas id="myChart" width="400" height="400" data-glucides="{{ aliment.glucides }}" data-lipides="{{ aliment.lipides }}" data-proteines="{{ aliment.proteines }}"></canvas>
+
+<hr>
+<h3>Petit + utile</h3>
+<div class="alert alert-info">{{ aliment.info|raw }}</div>
+</div>
+{% endblock %}
